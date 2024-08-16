@@ -2,9 +2,11 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET() {
+// Get all games
+export async function GET(request: Request) {
   try {
     const games = await prisma.game.findMany();
+    console.log(games);
     return new Response(JSON.stringify(games), {
       status: 200,
       headers: {

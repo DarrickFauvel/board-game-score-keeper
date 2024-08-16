@@ -8,6 +8,9 @@ datasource db {
 }
 
 model Game {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  title String
+  id                    String @id @default(auto()) @map("_id") @db.ObjectId
+  title                 String
+  bgg_short_description String
+  bgg_url               String
+  bgg_image_url         String
 }
