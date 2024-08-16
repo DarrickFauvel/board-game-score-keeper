@@ -21,3 +21,34 @@ export async function GET() {
     });
   }
 }
+
+// Post a new game
+export async function POST(request: Request) {
+  const response = await request.json();
+
+  const { title, bgg_short_description, bgg_url, bgg_image_url } = response;
+
+  try {
+    const game = await prisma.game.create({
+      data: {
+        title,
+        bgg_short_description,
+        bgg_url,
+        bgg_image_url,
+      },
+    });
+    return new Response(JSON.stringify(response), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: "Error creating game" }), {
+      status: 400,
+      headers: {
+        "Content-Type": "aplication/json",
+      },
+    });
+  }
+}
