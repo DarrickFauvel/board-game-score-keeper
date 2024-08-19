@@ -45,10 +45,14 @@ export async function UPDATE(request: Request, { params }: ParamsProps) {
 
     return NextResponse.json(updatedGame);
   } catch (error) {
-    console.error("Error updating game", error);
+    if (error instanceof Error) {
+      console.error("Error updating game", error);
 
-    if (error.code === "P2025") {
-      return NextResponse.json({ error: "Game not found" }, { status: 404 });
+      if (error.code === "P2025") {
+        return NextResponse.json({ error: "Game not found" }, { status: 404 });
+      }
+    } else {
+      console.error("Unexpected error", error);
     }
 
     return NextResponse.json(
