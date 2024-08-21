@@ -32,7 +32,7 @@ export async function GET(request: Request, { params }: ParamsProps) {
 }
 
 // Update a game
-export async function UPDATE(request: Request, { params }: ParamsProps) {
+export async function PATCH(request: Request, { params }: ParamsProps) {
   const { id } = params;
 
   try {
@@ -48,9 +48,7 @@ export async function UPDATE(request: Request, { params }: ParamsProps) {
     if (error instanceof Error) {
       console.error("Error updating game", error);
 
-      if (error.code === "P2025") {
-        return NextResponse.json({ error: "Game not found" }, { status: 404 });
-      }
+      return NextResponse.json({ error: "Game not found" }, { status: 404 });
     } else {
       console.error("Unexpected error", error);
     }
@@ -80,7 +78,7 @@ export async function DELETE(request: Request, { params }: ParamsProps) {
     });
 
     return NextResponse.json({
-      message: `Game "${game.title}" deleted successfully`,
+      message: `Game [${game.title}] deleted successfully`,
     });
   } catch (error) {
     console.error("Error deleting game", error);

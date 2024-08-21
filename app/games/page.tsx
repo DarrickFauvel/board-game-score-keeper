@@ -1,6 +1,14 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+
+type GameProps = {
+  id: string;
+  title: string;
+  bgg_image_url: string;
+};
 
 const Games = () => {
   const [games, setGames] = useState([]);
@@ -18,7 +26,23 @@ const Games = () => {
   return (
     <div>
       List of games here...
-      <div>{games}</div>
+      {games.length > 0 && (
+        <ul>
+          {games.map((game: GameProps) => (
+            <li className="flex items-center gap-3" key={game.id}>
+              <Link href={`/games/${game.id}`}>
+                <Image
+                  src={game.bgg_image_url}
+                  width={50}
+                  height={50}
+                  alt={game.title}
+                />
+                <span>{game.title}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

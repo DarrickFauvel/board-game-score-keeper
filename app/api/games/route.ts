@@ -22,7 +22,7 @@ export async function GET(request: Request) {
   }
 }
 
-// Post a new game
+// Create a new game
 export async function POST(request: Request) {
   const response = await request.json();
 

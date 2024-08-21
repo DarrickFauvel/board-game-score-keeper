@@ -8,6 +8,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "cf.geekdo-images.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };
